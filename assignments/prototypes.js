@@ -143,7 +143,76 @@ console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
 
   // Stretch task: 
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
+function Hero(char) {
+  Humanoid.call(this, char);
+  this.harm = char.harm;
+}
 
+// Subtract hp from char attacked
+Hero.prototype.attack = function (target) {
+  target.healthPoints -= this.harm;
+  console.log(`${target.name} was attacked for ${this.harm} damage!!!`);
+  console.log(`${target.name} now has ${target.healthPoints} HP.`);
+  if (target.healthPoints <= 0) {
+    console.log(`${this.name} is the winner!`);
+  }
+}
+
+const max = new Hero({
+  createdAt: new Date(),
+  dimensions: {
+    length: 3,
+    width: 2,
+    height: 1,
+  },
+  healthPoints: 20,
+  name: 'Max',
+  team: 'Mage Guild',
+  weapons: [
+    'Necronomicon',
+  ],
+  language: 'Common Tongue',
+  harm: 3,
+});
+
+
+
+function Villain(char) {
+  Humanoid.call(this, char);
+  this.harm = char.harm;
+}
+
+
+// Subtract hp from char attacked
+Villain.prototype.attack = function (target) {
+  target.healthPoints -= this.harm;
+  console.log(`${target.name} was attacked for ${this.harm} damage!!!`);
+  console.log(`${target.name} now has ${target.healthPoints} HP.`);
+  if (target.healthPoints <= 0) {
+    console.log(`${this.name} is the winner!`);
+  }
+}
+
+const chi = new Hero({
+  createdAt: new Date(),
+  dimensions: {
+    length: 1,
+    width: 1,
+    height: 1,
+  },
+  healthPoints: 10,
+  name: 'ChiChi',
+  team: 'Theives Guild',
+  weapons: [
+    'Dagger',
+  ],
+  language: 'Common Tongue',
+  harm: 1,
+});
+
+
+// console.log(<hero> attacked <villain> for <damage amount>)
+console.log(max.attack(chi));
 
   // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
 
